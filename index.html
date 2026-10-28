@@ -148,9 +148,18 @@ function render(){const h=(location.hash||'#home').slice(1),v=V[h]?h:'home';
  if(!db){$('#app').innerHTML=`<div class="hero"><img src="${L3}"><p>سجّل الدخول إلى حسابك في claude.ai لعرض بيانات الحدث.</p></div>`;return}
  $('#app').innerHTML=V[v]()}
 addEventListener('hashchange',()=>{if(location.hash!='#how'){render();scrollTo(0,0)}else document.getElementById('how')?.scrollIntoView({behavior:'smooth'})});
-(async()=>{render();try{db=await claude.use('db');user=await claude.use('user');assets=await claude.use('assets');dl=await claude.use('downloads');admin=user?await user.canEdit():false;canW=user?(await user.can('data.write'))!==false:false}catch(e){}
- if(!db)return render();
+// Standalone storage adapter: the original build depended on Claude's private runtime.
+// GitHub Pages is static hosting, so use browser-local storage instead.
+const localDb={collection(name){return {doc(id){return {async set(data){const all=JSON.parse(localStorage.getItem('arakon:'+name)||'{}');all[id]={...data};localStorage.setItem('arakon:'+name,JSON.stringify(all));window.dispatchEvent(new CustomEvent('arakon-db-change',{detail:name}));return true},async delete(){const all=JSON.parse(localStorage.getItem('arakon:'+name)||'{}');delete all[id];localStorage.setItem('arakon:'+name,JSON.stringify(all));window.dispatchEvent(new CustomEvent('arakon-db-change',{detail:name}));return true}}},onSnapshot(callback){const emit=()=>{const all=JSON.parse(localStorage.getItem('arakon:'+name)||'{}');const docs=Object.entries(all).map(([id,data])=>({id,data:()=>data}));callback({docs})};emit();window.addEventListener('arakon-db-change',e=>{if(e.detail===name)emit()});window.addEventListener('storage',emit);return ()=>{}}}}};
+function initLocalData(){
+ const existing=JSON.parse(localStorage.getItem('arakon:legions')||'{}');if(Object.keys(existing).length)return;
+ const X=[['المواهب','🎨','#e2a030'],['الرياضة','⚽','#2fa84f'],['الألعاب','🎮','#3a7bff'],['المانجا','📓','#9b5cf6'],['السينما','🎬','#d23b3b']];
+ const cd=['الإجابة عن 30 سؤالاً بشكل صحيح','الفوز بالمركز الأول في ثلاث فعاليات','الفوز بالمركز الأول في ثلاث نقاشات','لقب ملك التفاعل لمدة ثلاثة أيام','تنفيذ المهام المخصصة للبطاقة الخاصة'];
+ const legs={},cards={};for(let i=0;i<5;i++){const id='L'+(i+1);legs[id]={name:'فيلق '+X[i][0],icon:X[i][1],color:X[i][2],order:i+1};for(let j=0;j<5;j++){const cid='C'+(i+1)+(j+1);cards[cid]={legion:id,num:i*5+j+1,name:'بطاقة '+X[i][0]+' '+(j+1),desc:'بطاقة من فيلق '+X[i][0],cond:cd[j],rarity:j==4?'special':j==3?'rare':'normal',img:'',hidden:false}}}
+ localStorage.setItem('arakon:legions',JSON.stringify(legs));localStorage.setItem('arakon:cards',JSON.stringify(cards));localStorage.setItem('arakon:settings',JSON.stringify({main:D}));
+}
+(async()=>{render();try{initLocalData();db=localDb;user=null;assets=null;dl=null;admin=false;canW=false}catch(e){console.error(e)}
  const sub=(n,k,f)=>col(n).onSnapshot(s=>{S[k]=s.docs.map(d=>({id:d.id,...d.data()}));if(k=='legions')S[k].sort((a,b)=>a.order-b.order);if(f)f(s);render()},()=>{});
  sub('legions','legions');sub('cards','cards');sub('members','members');sub('tasks','tasks');sub('logs','logs');sub('admins','admins');sub('market','market');
- col('settings').onSnapshot(s=>{const d=s.docs.find(x=>x.id=='main');S.set=d?d.data():{};render()},()=>{});render()})();
+ col('settings').onSnapshot(s=>{const d=s.docs.find(x=>x.id=='main');S.set=d?d.data():D;render()},()=>{});render()})();
 </script></body></html>
