@@ -170,7 +170,7 @@ async function initLocalData(){
  const legs={},cards={};for(let i=0;i<5;i++){const id='L'+(i+1);legs[id]={name:'فيلق '+X[i][0],icon:X[i][1],color:X[i][2],order:i+1};for(let j=0;j<5;j++){const cid='C'+(i+1)+(j+1);cards[cid]={legion:id,num:i*5+j+1,name:'بطاقة '+X[i][0]+' '+(j+1),desc:'بطاقة من فيلق '+X[i][0],cond:cd[j],rarity:j==4?'special':j==3?'rare':'normal',img:'',hidden:false}}}
  localStorage.setItem('arakon:legions',JSON.stringify(legs));localStorage.setItem('arakon:cards',JSON.stringify(cards));localStorage.setItem('arakon:settings',JSON.stringify({main:D}));
 }
-(async()=>{render();try{await initLocalData();db=localDb;user=null;assets=null;dl=null;admin=false;canW=false}catch(e){console.error(e)}
+(async()=>{render();try{await initLocalData();db=localDb;user=null;assets=null;dl=null;admin=false;canW=true}catch(e){console.error(e)}
  const sub=(n,k,f)=>col(n).onSnapshot(s=>{S[k]=s.docs.map(d=>({id:d.id,...d.data()}));if(k=='legions')S[k].sort((a,b)=>a.order-b.order);if(f)f(s);render()},()=>{});
  sub('legions','legions');sub('cards','cards');sub('members','members');sub('tasks','tasks');sub('logs','logs');sub('admins','admins');sub('market','market');
  col('settings').onSnapshot(s=>{const d=s.docs.find(x=>x.id=='main');S.set=d?d.data():D;render()},()=>{});render()})();
