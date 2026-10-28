@@ -1,0 +1,14 @@
+{
+  "cards": [
+    {
+      "name": "اسم البطاقة",
+      "legion": "L1",
+      "num": 26,
+      "rarity": "normal",
+      "desc": "وصف البطاقة",
+      "cond": "شروط الحصول على البطاقة",
+      "img": "",
+      "hidden": false
+    }
+  ]
+}
