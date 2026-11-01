@@ -323,7 +323,9 @@
       "name": "ستار",
       "guild": "هافن",
       "gemoji": "⚜️",
-      "coins": 10
+      "coins": 10,
+      "rank": 1,
+      "tie": true
     },
     {
       "id": "mmvy2c3117yp",
@@ -333,7 +335,9 @@
       "name": "نويل",
       "guild": "هافن",
       "gemoji": "⚜️",
-      "coins": 10
+      "coins": 10,
+      "rank": 1,
+      "tie": true
     },
     {
       "id": "mmvy2cj31e5w",
@@ -343,7 +347,9 @@
       "name": "هانزو",
       "guild": "سميث",
       "gemoji": "🎩",
-      "coins": 10
+      "coins": 10,
+      "rank": 1,
+      "tie": true
     }
   ],
   "tasks": [
@@ -666,6 +672,11 @@
       "id": "lmvy2cozjkah",
       "t": "تسجيل بطاقة الألعاب `مسار الأسئلة` للعضو هانزو (+10 كوينز)",
       "at": "2026-11-01T16:47:43.999Z"
+    },
+    {
+      "id": "lmvy2ihtcsw6",
+      "t": "نشر تحديثات الموقع إلى GitHub",
+      "at": "2026-11-01T16:52:14.640Z"
     }
   ],
   "settings": {
