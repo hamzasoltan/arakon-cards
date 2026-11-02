@@ -323,9 +323,7 @@
       "name": "ستار",
       "guild": "هافن",
       "gemoji": "⚜️",
-      "coins": 10,
-      "rank": 1,
-      "tie": true
+      "coins": 10
     },
     {
       "id": "mmvy2c3117yp",
@@ -335,9 +333,7 @@
       "name": "نويل",
       "guild": "هافن",
       "gemoji": "⚜️",
-      "coins": 10,
-      "rank": 1,
-      "tie": true
+      "coins": 10
     },
     {
       "id": "mmvy2cj31e5w",
@@ -347,17 +343,24 @@
       "name": "هانزو",
       "guild": "سميث",
       "gemoji": "🎩",
-      "coins": 10,
-      "rank": 1,
-      "tie": true
+      "coins": 10
+    },
+    {
+      "id": "mmvzl1tjsnyp",
+      "cards": {},
+      "name": "كايجي",
+      "guild": "هافن",
+      "gemoji": "⚜️"
     }
   ],
   "tasks": [
     {
       "id": "tmvxjh2eg6xl",
-      "status": "active",
+      "status": "ended",
       "coins": 20,
-      "done": [],
+      "done": [
+        "mmvzl1tjsnyp"
+      ],
       "title": "أعلى عضو تفاعل بكل الفيالق.",
       "desc": "بيتم جمع تفاعل كل فيالق الاركون واللي بيجيب أعلى واحد هو الفائز.",
       "cond": "يتفاعل بكل الفيالق مشان يضمن الفوز.",
@@ -677,6 +680,21 @@
       "id": "lmvy2ihtcsw6",
       "t": "نشر تحديثات الموقع إلى GitHub",
       "at": "2026-11-01T16:52:14.640Z"
+    },
+    {
+      "id": "lmvy2krcc2pp",
+      "t": "نشر تحديثات الموقع إلى GitHub",
+      "at": "2026-11-01T16:54:00.300Z"
+    },
+    {
+      "id": "lmvzl1ewpw9t",
+      "t": "حفظ مهمة أعلى عضو تفاعل بكل الفيالق.",
+      "at": "2026-11-02T18:18:36.601Z"
+    },
+    {
+      "id": "lmvzl1tjxe15",
+      "t": "حفظ عضو كايجي",
+      "at": "2026-11-02T18:18:55.581Z"
     }
   ],
   "settings": {
